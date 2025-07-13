@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  </head>
+  <body>
+    <main  class="bg-gray-800 overflow-hidden hide-scrollbar h-screen w-screen">
+        <button onClick="showPopUp()" class="bg-blue-600 hover:bg-blue-700 h-10 w-40 rounded-xl m-3">
+            Upload File
+        </button>
+        <div class="pop fixed top-0 right-0  hidden backdrop-blur-[3px] w-screen h-screen flex flex-col justify-center items-center">
+
+
+            <form action="/upload" method="post" enctype="multipart/form-data">
+
+                <div class="flex items-center justify-center w-100">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-600 border-dashed rounded-2xl cursor-pointer bg-gray-600 dark:hover:bg-gray-700 dark:bg-gray-600 hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-600 dark:hover:bg-gray-700">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        </div>
+                        <input id="dropzone-file" type="file" name ="file" class="hidden" />
+                    </label>
+                </div> 
+
+                <div class="flex flex-row gap-4 mt-5 justify-center items-center">
+                <button type=submit class="bg-gray-600 w-30 h-10 text-center rounded-xl hover:bg-gray-700">Upload File</button>
+
+                <button type="button" onClick="hidePopUp()" class="h-10 w-20 bg-gray-600 rounded-xl text-center hover:bg-gray-700">close</button>
+                </div>
+
+
+            </form>
+
+        </div>
+        <div class="files flex flex-col gap-3">
+            <% files.forEach((file)=>{%>
+            <div class=" m-4 p-2 rounded-md cursor-pointer bg-gray-400 flex flex-row justify-between p-3">
+                <h1><%= file.originalname %></h1>
+                <!-- Trigger plain JavaScript download -->
+                <!-- <button onclick="downloadFile('<%= file.path %>', '<%= file.originalname %>')">
+                    Download
+                </button> -->
+                <!-- <a href="/download/<%= file.path %>" download="<%= file.originalname %>"><i class="ri-download-fill"></i></a> -->
+                <a href="<%= file.path.replace('/upload/', '/upload/fl_attachment/') %>">Download</a>
+            </div>
+            <%}) %>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <script>
+        function showPopUp(){
+            document.querySelector('.pop').style.display = 'flex'
+        }
+
+        function hidePopUp(){
+            document.querySelector('.pop').style.display = 'none'
+        }
+
+//   async function downloadFile(url, filename) {
+//     try {
+//       // 1. Fetch the file from Cloudinary
+//       const response = await fetch(url, {
+//         mode: 'cors' // allow cross-origin download (needed when file is not hosted on your domain)
+//       });
+
+//       // 2. Convert response to a Blob (a file-like object in browser)
+//       const blob = await response.blob();
+
+//       // 3. Create a fake link element
+//       const link = document.createElement('a');
+
+//       // 4. Turn the blob into a temporary URL
+//       link.href = URL.createObjectURL(blob);
+
+//       // 5. Set the download name (what the user will see)
+//       link.download = filename;
+
+//       // 6. Simulate clicking the link to start download
+//       link.click();
+
+//       // 7. Clean up the blob URL from memory
+//       URL.revokeObjectURL(link.href);
+//     } catch (error) {
+//       console.error("Download failed:", error);
+//       alert("Sorry, something went wrong while downloading.");
+//     }
+//   }
+
+    </script>
+  </body>
+</html>

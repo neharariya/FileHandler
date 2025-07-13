@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="h-screen flex justify-center items-center">
+
+    <form action="/user/register" method="post" class="h-80 rounded-lg w-80 bg-gray-300 w-50 flex flex-col justify-center items-center gap-4" action="">
+      <div>
+      <p>User Name</p>
+      <input class=" p-2 w-50 h-8 rounded-xl bg-gray-200 text-sm border"   name=name type= "text" placeholder="type your name here"></input>
+      </div>
+
+      <div>
+        <p>Email ID</p>
+        <input class="p-2 bg-gray-200 w-50 rounded-xl text-sm border w-20 h-8 rounded-xl" name =emailID type="email" placeholder="your emailID"></input>
+      </div>
+      
+      <div>
+        <p>Password</p>
+        <input placeholder="*****" class="p-2 border bg-gray-200 h-8 text-sm rounded-xl" name =password type ="password"></input>
+      </div>
+      <button type="submit" class="text-center w-30 h-10 p-2 bg-gray-500 rounded-xl">Submit</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  </body>
+</html>
